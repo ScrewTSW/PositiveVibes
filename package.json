@@ -24,7 +24,7 @@
     "eslint": "^8.54.0",
     "typescript": "^5.2.2",
     "buttplug": "3.2.1",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.5",
     "nodemon": "3.0.1"
   },
   "dependencies": {}
