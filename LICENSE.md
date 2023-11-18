@@ -1,0 +1,1 @@
+[WTFPL](http://www.wtfpl.net/) - do What The Fuck you PLease
