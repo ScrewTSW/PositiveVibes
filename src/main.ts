@@ -111,7 +111,7 @@ async function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "../index.html"));
+  mainWindow.loadFile(path.join(__dirname, "../src/static/index.html"));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
