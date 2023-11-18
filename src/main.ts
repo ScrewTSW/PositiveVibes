@@ -114,7 +114,7 @@ async function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "../src/static/index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (process.env.DEBUG_ENABLED === "true") mainWindow.webContents.openDevTools();
 
   // Start scanning for devices
   await buttplugClient.startScanning().then(async () => {
