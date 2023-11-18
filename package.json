@@ -2,12 +2,14 @@
   "name": "positive-vibes",
   "version": "1.0.0",
   "description": "A minimal Electron application written with Typescript",
+  "main": "./dist/main.js",
   "scripts": {
-    "clean": "rimraf ./dist ./node_modules/ && npm install",
+    "clean": "rimraf ./build/ ./dist ./node_modules/ && npm ci",
     "build": "tsc",
     "watch": "nodemon -e ts,html,css -x \"npm run start\"",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
-    "start": "npm run build && electron ./dist/main.js"
+    "start": "npm run build && electron ./dist/main.js",
+    "package": "npm run clean && npm run build && electron-builder --config ./electron-builder.json"
   },
   "repository": "https://github.com/ScrewTSW/PositiveVibes",
   "keywords": [
@@ -21,11 +23,13 @@
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.0.0",
     "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
     "eslint": "^8.54.0",
-    "typescript": "^5.2.2",
-    "buttplug": "3.2.1",
+    "nodemon": "3.0.1",
     "rimraf": "^5.0.5",
-    "nodemon": "3.0.1"
+    "typescript": "^5.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "buttplug": "3.2.1"
+  }
 }

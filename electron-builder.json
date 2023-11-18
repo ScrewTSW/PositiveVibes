@@ -1,0 +1,31 @@
+{
+  "appId": "eu.dasancti.positive-vibes",
+  "directories": {
+    "output": "build"
+  },
+  "mac": {
+    "category": "public.app-category.entertainment",
+    "target": "dmg"
+  },
+  "win": {
+    "target": ["portable"]
+  },
+  "linux": {
+    "target": ["AppImage"]
+  },
+  "publish": [
+    {
+      "provider": "github",
+      "owner": "ScrewTSW",
+      "repo": "PositiveVibes"
+    }
+  ],
+  "files": [
+    "dist/**/*",
+    "src/static/**/*",
+    "package.json",
+    "package-lock.json",
+    "LICENSE.md",
+    "README.md"
+  ]
+}
