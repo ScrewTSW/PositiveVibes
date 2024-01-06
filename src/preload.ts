@@ -1,6 +1,8 @@
+console.log('[preload.ts] script loaded');
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener("DOMContentLoaded", () => {
+  console.log('[preload.ts] DomContentLoaded');
   const replaceText = (selector: string, text: string) => {
     const element = document.getElementById(selector);
     if (element) {

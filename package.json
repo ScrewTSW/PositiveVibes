@@ -4,13 +4,15 @@
   "description": "A minimal Electron application written with Typescript",
   "main": "./dist/main.js",
   "scripts": {
-    "clean": "rimraf ./build/ ./dist ./node_modules/ && npm ci",
+    "clean": "npm i --save-dev rimraf && rimraf ./build/ ./dist ./node_modules/ && npm ci",
     "build": "tsc",
-    "watch": "nodemon -e ts,html,css -x \"npm run start\"",
+    "watch": "nodemon -e ts,html,css -x \"npm run startDev\"",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js",
     "startDev": "npm run build && cross-env DEBUG_ENABLED=true electron ./dist/main.js",
-    "package": "npm run clean && npm run build && electron-builder --config ./electron-builder.json"
+    "package-linux": "npm run clean && npm run build && electron-builder --config ./electron-builder.json --linux",
+    "package-win": "npm run clean && npm run build && electron-builder --config ./electron-builder.json --win",
+    "package-mac": "npm run clean && npm run build && electron-builder --config ./electron-builder.json --mac"
   },
   "repository": "https://github.com/ScrewTSW/PositiveVibes",
   "keywords": [
