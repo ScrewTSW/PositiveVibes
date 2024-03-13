@@ -23,6 +23,8 @@
   "author": "ScrewTSW",
   "license": "WTFPL",
   "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/ws": "^8.5.10",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.0.0",
     "cross-env": "^7.0.3",
@@ -34,6 +36,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "axios": "^1.6.7",
     "buttplug": "3.2.1"
   }
 }

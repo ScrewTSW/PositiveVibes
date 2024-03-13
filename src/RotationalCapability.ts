@@ -9,6 +9,8 @@ export class RotationalCapability {
     private index: number;
     private featureDescriptor: string;
     private stepCount: number;
+    private rotateCommands: any[] = [];
+    private isPerformingRotateCommand: boolean = false;
 
     constructor(device: ButtplugClientDevice, index: number, featureDescriptor: string, actuatorType: ActuatorType, stepCount: number) {
         this.device = device;
@@ -24,10 +26,29 @@ export class RotationalCapability {
         setTimeout(async () => await this.device.stop(), 500);
     }
 
-    public async rotate(speed: number, clockwise: boolean, duration?: number): Promise<void> {
+    public async queueRotate(speed: number, clockwise: boolean, duration: number): Promise<void> {
+        this.rotateCommands.push({speed: speed, clockwise: clockwise, duration: duration});
+        await this.performNextRotate();
+    }
+
+    private async performNextRotate(): Promise<void> {
+        if (!this.isPerformingRotateCommand) {
+            let rotateCommand: any = this.rotateCommands.pop();
+            if (rotateCommand !== undefined) {
+                this.isPerformingRotateCommand = true;
+                await this.rotate(rotateCommand.speed, rotateCommand.clockwise, rotateCommand.duration);
+            }
+        }
+    }
+
+    private async rotate(speed: number, clockwise: boolean, duration?: number): Promise<void> {
         await this.device.send(new RotateCmd([new RotateSubcommand(this.index, speed, clockwise)],this.device.index));
         if (duration !== undefined) {
-            setTimeout(async () => await this.device.stop(), duration);
+            setTimeout(async () => { 
+                await this.device.stop();
+                this.isPerformingRotateCommand = false;
+                await this.performNextRotate();
+            }, duration);
         }
     }
 }

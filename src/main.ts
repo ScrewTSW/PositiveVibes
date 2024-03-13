@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from "electron";
-import * as path from "path";
+import { app, BrowserWindow } from 'electron';
+import * as path from 'path';
+import { Manager } from "./Manager";
 
 async function createWindow() {
   console.log('[main.ts] createWindow');
@@ -18,13 +19,14 @@ async function createWindow() {
   console.log('[main.ts] mainWindow.loadFile index.html');
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "..","src","static","index.html"));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _manager: Manager = new Manager(mainWindow);
 
   // Open the DevTools.
   if (process.env.DEBUG_ENABLED === "true") mainWindow.webContents.openDevTools();
 }
 
 console.log('[main.ts] Initializing electron app...');
-app.commandLine.appendSwitch('ignore-certificate-errors');
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

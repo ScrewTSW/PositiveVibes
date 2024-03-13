@@ -51,6 +51,14 @@ export class Device {
         return sensorResults;
     }
 
+    public async rotateFor(speed: number, clockwise: boolean, duration: number): Promise<void> {
+        this.rotationalCapabilities.forEach(async (rotationalCapability) => await rotationalCapability.queueRotate(speed, clockwise, duration));
+    }
+
+    public async vibrateFor(speed: number, duration: number): Promise<void> {
+        this.scalarCapabilities.forEach(async (scalarCapability) => await scalarCapability.queueScalar(speed, duration));
+    }
+
     public async pingLinears(): Promise<void> {
         this.linearCapabilities.forEach(async (linearCapability) => await linearCapability.ping());
     }

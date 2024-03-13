@@ -9,6 +9,8 @@ export class ScalarCapability {
     private index: number;
     private featureDescriptor: string;
     private stepCount: number;
+    private scalarCommands: any[] = [];
+    private isPerformingScalarAction: boolean = false;
 
     constructor(device: ButtplugClientDevice, index: number, featureDescriptor: string, actuatorType: ActuatorType, stepCount: number) {
         this.device = device;
@@ -24,10 +26,29 @@ export class ScalarCapability {
         setTimeout(async () => await this.device.stop(), 500);
     }
 
-    public async scalar(speed: number, duration?: number): Promise<void> {
+    public async queueScalar(speed: number, duration: number): Promise<void> {
+        this.scalarCommands.push({speed: speed, duration: duration});
+        await this.performNextScalar();
+    }
+
+    private async performNextScalar(): Promise<void> {
+        if (!this.isPerformingScalarAction) {
+            let scalarCommand: any = this.scalarCommands.pop();
+            if (scalarCommand !== undefined) {
+                this.isPerformingScalarAction = true;
+                await this.scalar(scalarCommand.speed, scalarCommand.duration);
+            }
+        }
+    }
+
+    private async scalar(speed: number, duration?: number): Promise<void> {
         await this.device.scalar(new ScalarSubcommand(this.index, speed, this.actuatorType));
         if (duration !== undefined) {
-            setTimeout(async () => await this.device.stop(), duration);
+            setTimeout(async () => { 
+                await this.device.stop();
+                this.isPerformingScalarAction = false;
+                await this.performNextScalar();
+            }, duration);
         }
     }
 }

@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Positive Vibes</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Positive Vibes</title>
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src
       'self'
-      'unsafe-inline'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src
+      'unsafe-inline'" />
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src
       'self'
-      'unsafe-inline'"
-    />
-  </head>
-  <body>
-    <h1>IntiFace Devices</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>IntiFace connection status</th>
-          <th><input type="button" id="intifaceStatus" value="Connect"/></th>
-        </tr>
-        <tr>
-          <th>Device</th>
-          <th>State</th>
-        </tr>
-      </thead>
-      <tbody id="devices"></tbody>
-    </table>
-    <!-- You can also require other files to run in this process -->
-    <script>
-      require('../../dist/renderer.js')
-    </script>
-  </body>
+      'unsafe-inline'" />
+</head>
+
+<body>
+  <h1>Twitch authentication</h1>
+  <table>
+    <tr>
+      <th>Twitch auth status</th>
+      <td><input type="button" id="twitchAuthButtonId" value="Authenticate to Twitch" /></td>
+    </tr>
+  </table>
+  <h1>IntiFace Devices</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>IntiFace connection status</th>
+        <th><input type="button" id="intifaceStatus" value="Connect" /></th>
+      </tr>
+      <tr>
+        <th>Device</th>
+        <th>State</th>
+      </tr>
+    </thead>
+    <tbody id="devices"></tbody>
+  </table>
+  <!-- You can also require other files to run in this process -->
+  <script>
+    require('../../dist/renderer.js')
+  </script>
+</body>
+
 </html>
