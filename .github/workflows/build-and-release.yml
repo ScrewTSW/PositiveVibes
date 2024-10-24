@@ -26,8 +26,12 @@ jobs:
           cache: 'pnpm'
       - name: Install wine
         run: |
+          sudo dpkg --add-architecture i386
+          sudo mkdir -pm755 /etc/apt/keyrings
+          sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+          sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
           sudo apt-get update
-          sudo apt-get install -y wine-staging
+          sudo apt-get install --install-recommends winehq-stable
       - name: Build Windows
         run: |
           pnpm clean
