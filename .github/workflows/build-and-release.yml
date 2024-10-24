@@ -1,0 +1,33 @@
+name: Build and release Positive Vibes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get current version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(npm pkg get version)
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Execute pnpm
+        run: pnpm install
+      - name: Build Windows
+        run: |
+          pnpm clean
+          pnpm package-win
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/*
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Release ${{ steps.get_version.outputs.VERSION }}
