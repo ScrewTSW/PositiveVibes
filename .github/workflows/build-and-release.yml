@@ -41,19 +41,17 @@ jobs:
       - name: Release (main)
         uses: softprops/action-gh-release@v2
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: build/*
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Release ${{ steps.get_version.outputs.VERSION }}
+          tag: v${{ steps.get_version.outputs.VERSION }}
       - name: Release (staging)
         uses: softprops/action-gh-release@v2
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: build/*
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Release ${{ steps.get_version.outputs.VERSION }}.${{ github.sha }}
+          tag: v${{ steps.get_version.outputs.VERSION }}.${{ github.sha }}
           prerelease: true
