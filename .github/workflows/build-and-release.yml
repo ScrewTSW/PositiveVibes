@@ -10,8 +10,14 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout (main)
         uses: actions/checkout@v4
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      - name: Checkout (staging)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
       - name: Get current version
         id: get_version
         run: echo ::set-output name=VERSION::$(npm pkg get version)
