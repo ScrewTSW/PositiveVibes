@@ -33,12 +33,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install --install-recommends winehq-stable
       - name: Build Windows
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm clean
           pnpm package-win
       - name: Release (main)
         uses: softprops/action-gh-release@v2
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: build/*
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -46,6 +50,8 @@ jobs:
       - name: Release (staging)
         uses: softprops/action-gh-release@v2
         if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: build/*
           token: ${{ secrets.GITHUB_TOKEN }}
