@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-release:
@@ -23,15 +24,26 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - name: Execute pnpm
-        run: pnpm install
+      - name: Install wine
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wine-staging
       - name: Build Windows
         run: |
           pnpm clean
           pnpm package-win
-      - name: Release
+      - name: Release (main)
         uses: softprops/action-gh-release@v2
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           files: build/*
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Release ${{ steps.get_version.outputs.VERSION }}
+      - name: Release (staging)
+        uses: softprops/action-gh-release@v2
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        with:
+          files: build/*
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Release ${{ steps.get_version.outputs.VERSION }}.${{ github.sha }}
+          prerelease: true
