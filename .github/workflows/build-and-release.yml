@@ -45,7 +45,6 @@ jobs:
           pnpm package-win
       - name: Build Linux
         run: |
-          pnpm clean
           pnpm package-linux
       - name: Release (main)
         uses: softprops/action-gh-release@v2
@@ -55,9 +54,8 @@ jobs:
         with:
           files: |
             build/*
-          exclude: |
-            **/*.yml
-            **/*.yaml
+            !**/*.yml
+            !**/*.yaml
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Release ${{ env.RELEASE_VERSION }}
           tag_name: v${{ env.RELEASE_VERSION }}
@@ -69,9 +67,8 @@ jobs:
         with:
           files: |
             build/*
-          exclude: |
-            **/*.yml
-            **/*.yaml
+            !**/*.yml
+            !**/*.yaml
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Release ${{ env.RELEASE_VERSION }}.${{ github.sha }}
           tag_name: v${{ env.RELEASE_VERSION }}.${{ github.sha }}
