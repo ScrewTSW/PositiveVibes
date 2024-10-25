@@ -14,18 +14,11 @@
     "target": ["AppImage"],
     "category": "Utility"
   },
-  "publish": [
-    {
-      "provider": "github",
-      "owner": "ScrewTSW",
-      "repo": "PositiveVibes"
-    }
-  ],
   "files": [
     "dist/**/*",
     "src/static/**/*",
     "package.json",
-    "package-lock.json",
+    "pnpm-lock.yaml",
     "LICENSE.md",
     "README.md"
   ]

@@ -14,9 +14,9 @@
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "pnpm build && electron ./dist/main.js",
     "startDev": "pnpm build && cross-env DEBUG_ENABLED=true electron ./dist/main.js",
-    "package-linux": "pnpm build && npx electron-builder --config ./electron-builder.json --linux",
-    "package-win": "pnpm build && npx electron-builder --config ./electron-builder.json --win",
-    "package-mac": "pnpm build && npx electron-builder --config ./electron-builder.json --mac"
+    "package-linux": "pnpm build && npx electron-builder --config ./electron-builder.json --publish=never --linux --x64",
+    "package-win": "pnpm build && npx electron-builder --config ./electron-builder.json --publish=never --win --x64",
+    "package-mac": "pnpm build && npx electron-builder --config ./electron-builder.json --publish=never --mac"
   },
   "repository": "https://github.com/ScrewTSW/PositiveVibes",
   "keywords": [
