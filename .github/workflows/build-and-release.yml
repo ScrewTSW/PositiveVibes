@@ -40,14 +40,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install --install-recommends winehq-stable
       - name: Build Windows
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm clean
           pnpm package-win
       - name: Build Linux
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm clean
           pnpm package-linux
