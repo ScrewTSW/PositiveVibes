@@ -45,6 +45,12 @@ jobs:
         run: |
           pnpm clean
           pnpm package-win
+      - name: Build Linux
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm clean
+          pnpm package-linux
       - name: Release (main)
         uses: softprops/action-gh-release@v2
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
