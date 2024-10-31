@@ -319,6 +319,24 @@ export class Manager {
                             await device.vibrateFor(0.8, 2000);
                           });
                         }
+                        if (redemption.reward.title === 'Give Jock Rubs') {
+                          await Manager.activeDevices.forEach(async (device) => {
+                            await device.rotateFor(0.05, true, 500);
+                            await device.vibrateFor(0.05, 500);
+                            await device.rotateFor(0.1, true, 500);
+                            await device.vibrateFor(0.1, 500);
+                            await device.rotateFor(0.2, true, 2000);
+                            await device.vibrateFor(0.2, 2000);
+                            await device.rotateFor(0.35, true, 2000);
+                            await device.vibrateFor(0.35, 2000);
+                            await device.rotateFor(0.5, true, 2000);
+                            await device.vibrateFor(0.5, 2000);
+                            await device.rotateFor(0.35, true, 2000);
+                            await device.vibrateFor(0.35, 2000);
+                            await device.rotateFor(0.2, true, 2000);
+                            await device.vibrateFor(0.2, 2000);
+                          });
+                        }
                       }
                     }
                   });
