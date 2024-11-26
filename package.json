@@ -27,7 +27,7 @@
   "author": "ScrewTSW",
   "license": "WTFPL",
   "devDependencies": {
-    "@types/node": "20.14.8",
+    "@types/node": "22.10.0",
     "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
